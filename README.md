@@ -11,3 +11,9 @@ This above procedure works well for a moderate number of flows. As the number of
 
 # working
   As mentioned above, a queue in which the flow has to be added is determined uniquely by the jenkins hash using the five-tuple, we get a 10-bit value which is returned by fq_codel_hash() function which means the value ranges from 0 to 1023. Now as we are using 8-way set-associative hash in which we use divide and rule policy, we divide 1024 queues into 128 sets with 8 queues each. Now we take 10-bit value returned by fq_codel_hash() fuction and store it in a variable named 'idx' and we take modulo 128 of the idx. Now we will get a value ranging from 0 to 127, here we have 128 sets with indices 0 to 127, and we will go to a particular set using this value. Now we will run while loop from 0 to 7 for each flow to determine in which queue they are added. Firstly if the header of the queue is empty then that queue is empty and we can directly add that flow to that queue. If the header of the queue is not empty then there is a flow already added to that queue, now we have to compare the values returned by skb_hash() function of both the flows so as to determine that both of them are of the same flow. If they are same then they are from the same flow and we will append the flow to this queue. If these values are not same then this is a collision and the flow goes to the next queue and this process continues until it finds a particular queue to be added.
+
+## References
+
+* [The Flow Queue CoDel Packet Scheduler and Active Queue Management Algorithm (RFC 8290)](https://tools.ietf.org/html/rfc8290)
+
+* [LINUX Code of FQ_CODEL](https://github.com/torvalds/linux/blob/master/net/sched/sch_fq_codel.c)
