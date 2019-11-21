@@ -10,13 +10,9 @@ The concept of set associativity we use here is similar to the caches that we us
 This above procedure works well for a moderate number of flows. As the number of flows increase, the number of hash collisions also increase. The birthday problem provides a more concrete view of why this occurs. There is a 50% chance of collision occurring as the number of flows reaches sqrt(number of buckets). The main aim of this project is to avoid this and reduce the chances of hash collisions. As mentioned in RFC 8290, with 1024 buckets and perfect hashing, the probability of no collision occurring with 100 flows is 90.78% - this probability can be further improved by using set-associative hashing. According to the RFC's analytical equations, the probability of no collision with an 8-way set associative hash is around 100%, which is a significant improvement over the normal hashing technique.
 
 # Refernces 
-   [The Flow Queue CoDel Packet Scheduler and Active Queue Management Algorithm (RFC 8290)](https://tools.ietf.org/html/rfc8290)
+   * [The Flow Queue CoDel Packet Scheduler and Active Queue Management Algorithm (RFC 8290)](https://tools.ietf.org/html/rfc8290) 
    
-      This memo presents the FQ-CoDel hybrid packet scheduler and Active Queue Management (AQM) algorithm, a powerful tool for fighting      bufferbloat and reducing latency.
-   
-   [LINUX Code of FQ_CODEL](https://github.com/torvalds/linux/blob/master/net/sched/sch_fq_codel.c)
-   
-       The Linux implementation of FQ_CODEL
+   * [LINUX Code of FQ_CODEL](https://github.com/torvalds/linux/blob/master/net/sched/sch_fq_codel.c)
    
    
    
